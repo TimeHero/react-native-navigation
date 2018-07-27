@@ -27,7 +27,9 @@
         [[[RCCManager sharedInstance].getBridge uiManager] configureNextLayoutAnimation:nil withCallback:^(NSArray* arr){} errorCallback:^(NSArray* arr){}];
     });
     
-    if (tabBarController.selectedIndex != [tabBarController.viewControllers indexOfObject:viewController]) {
+    unsigned long nextIndex = [tabBarController.viewControllers indexOfObject:viewController];
+    
+    if (tabBarController.selectedIndex != nextIndex) {
         NSDictionary *body = @{
                                @"selectedTabIndex": @([tabBarController.viewControllers indexOfObject:viewController]),
                                @"unselectedTabIndex": @(tabBarController.selectedIndex)
@@ -50,10 +52,13 @@
         [RCCTabBarController sendScreenTabPressedEvent:viewController body:nil];
     }
     
-    
-    
-    return YES;
+    if(nextIndex == 2) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
+
 
 - (UIImage *)image:(UIImage*)image withColor:(UIColor *)color1 {
     UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
