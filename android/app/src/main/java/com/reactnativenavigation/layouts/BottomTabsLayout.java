@@ -491,6 +491,8 @@ public class BottomTabsLayout extends BaseLayout implements AHBottomNavigation.O
             return false;
         }
 
+        if(true) return false;
+
         final int unselectedTabIndex = currentStackIndex;
         sendTabSelectedEventToJs(position, unselectedTabIndex);
         switchTab(position, NavigationType.BottomTabSelected);
